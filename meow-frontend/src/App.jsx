@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       <HomeHeader />
-      <CardContainer />
+      <CardContainer title="To Watch!" />
     </>
   )
 }

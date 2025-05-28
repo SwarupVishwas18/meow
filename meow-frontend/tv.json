@@ -1,0 +1,87 @@
+{
+  "adult": false,
+  "backdrop_path": null,
+  "created_by": [],
+  "episode_run_time": [30],
+  "first_air_date": "2008-07-21",
+  "genres": [
+    {
+      "id": 16,
+      "name": "Animation"
+    }
+  ],
+  "homepage": "",
+  "id": 24989,
+  "in_production": false,
+  "languages": ["en"],
+  "last_air_date": "2008-07-21",
+  "last_episode_to_air": {
+    "id": 649350,
+    "name": "Volume 1",
+    "overview": "High school senior Mark Grayson reaches the time in a boy's life when he starts dating, applying to colleges, and using his newly inherited superpowers to battle the world's deadliest criminals",
+    "vote_average": 0,
+    "vote_count": 0,
+    "air_date": "2008-07-21",
+    "episode_number": 1,
+    "episode_type": "standard",
+    "production_code": "",
+    "runtime": 30,
+    "season_number": 1,
+    "show_id": 24989,
+    "still_path": null
+  },
+  "name": "Invincible",
+  "next_episode_to_air": null,
+  "networks": [
+    {
+      "id": 17,
+      "logo_path": "/6o7HFq6Sm6mOt5Kh5iL6VzqJ4No.png",
+      "name": "MTV2",
+      "origin_country": "US"
+    }
+  ],
+  "number_of_episodes": 6,
+  "number_of_seasons": 1,
+  "origin_country": ["US"],
+  "original_language": "en",
+  "original_name": "Invincible",
+  "overview": "Every kid wants superpowers. But not every kid's father is Omni-Man, the greatest superhero the world has ever known.",
+  "popularity": 0.7355,
+  "poster_path": null,
+  "production_companies": [],
+  "production_countries": [],
+  "seasons": [
+    {
+      "air_date": null,
+      "episode_count": 1,
+      "id": 35216,
+      "name": "Specials",
+      "overview": "",
+      "poster_path": null,
+      "season_number": 0,
+      "vote_average": 0
+    },
+    {
+      "air_date": "2008-07-21",
+      "episode_count": 6,
+      "id": 35215,
+      "name": "Season 1",
+      "overview": "",
+      "poster_path": null,
+      "season_number": 1,
+      "vote_average": 0
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Ended",
+  "tagline": "",
+  "type": "Scripted",
+  "vote_average": 7,
+  "vote_count": 2
+}
