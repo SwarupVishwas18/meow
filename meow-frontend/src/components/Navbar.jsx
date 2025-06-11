@@ -5,9 +5,9 @@ function Navbar() {
                 meow
             </h1>
             <ul className="nav-links">
-                <li><a href="">Home</a></li>
-                <li><a href="">Watchlist</a></li>
-                <li><a href="">Github</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/kanban">Watchlist</a></li>
+                <li><a href="https://github.com/SwarupVishwas18/meow">Github</a></li>
             </ul>
         </nav>
     )

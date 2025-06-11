@@ -24,6 +24,10 @@ function Card({ id, type }) {
         }
     };
 
+    console.log("these are options for URL: ");
+
+    console.log(options);
+
 
 
     useEffect(() => {
@@ -49,11 +53,15 @@ function Card({ id, type }) {
 
 
             })
-            .catch(err => console.error(err));
+            .catch(err => {
+                console.error(err)
+
+            });
     }, [])
 
     return (
-        <div className="card" style={{
+
+        movieData.name && (<div className="card" style={{
             backgroundImage: `url(${movieData.img})`,
 
         }}>
@@ -64,7 +72,7 @@ function Card({ id, type }) {
                 <p>Release Date: {movieData.date}</p>
             </div>
 
-        </div>
+        </div>)
     );
 }
 
