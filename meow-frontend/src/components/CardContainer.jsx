@@ -11,7 +11,10 @@ function CardContainer({ title, homeIds, mediaTypes }) {
                   <Card id={202555} type="tv" />
                   <Card id={24989} type="tv" /> */}
                 {homeIds.map((id, index) => (
-                    <Card key={id} id={id} type={mediaTypes[index]} />
+                    <a href={"/details/" + mediaTypes[index] + "/" + id}>
+                        <Card key={id} id={id} type={mediaTypes[index]} />
+
+                    </a>
                 ))}
             </div>
         </section>
