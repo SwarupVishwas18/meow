@@ -2,10 +2,12 @@ import { useParams } from 'react-router';
 import not_found from './assets/404.png'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import FormModal from './components/Modal';
 
 function Details() {
 
     const { cat, id } = useParams();
+    const [isModalVisible, setIsModalVisible] = useState(false);
     const type = cat
     if (type == "movie") {
         var url = 'https://api.themoviedb.org/3/movie/' + id + '?language=en-US'
@@ -72,6 +74,8 @@ function Details() {
 
             });
     }, [])
+
+
     return (
         <div className="detail-page" >
             <div className="ls">
@@ -90,7 +94,7 @@ function Details() {
                 </div>
 
                 <div className="watch-btn">
-                    <button>Watched</button>
+                    <button onClick={() => { setIsModalVisible(true) }}>Watched</button>
                     <a href="/"><button>Go Back</button></a>
                 </div>
             </div>
@@ -98,6 +102,8 @@ function Details() {
             <div className="rs">
                 <img className='detail-img' src={movieData.img} alt="" />
             </div>
+
+            {isModalVisible && <FormModal setIsModalVisible={setIsModalVisible} />}
         </div>
     )
 }
