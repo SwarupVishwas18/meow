@@ -43,8 +43,8 @@ public class MovieController {
         return movieService.saveMovie(movie);
     }
 
-    @PostMapping("/update")
-    public Movie updateMovie(@RequestBody Movie movie){
-        return movieService.updateMovie(movie.getId(), movie);
+    @PostMapping("/update/{id}")
+    public Movie updateMovie(@PathVariable Long id, @RequestBody Movie movie){
+        return movieService.updateMovie(id, movie);
     }
 }
