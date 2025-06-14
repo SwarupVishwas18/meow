@@ -45,4 +45,9 @@ public class MovieServiceImpl implements MovieService{
     public void deleteMovie(Long id) {
         movieRepository.deleteById(id);
     }
+
+    @Override
+    public List<Movie> getMoviesByStatus(int status) {
+        return movieRepository.findByStatus(status);
+    }
 }
