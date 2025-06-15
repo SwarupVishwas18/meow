@@ -4,9 +4,9 @@ import not_found from '../assets/404.png'
 function Card({ id, type }) {
 
     if (type == "movie") {
-        var url = 'https://api.themoviedb.org/3/movie/' + id + '?language=en-US'
+        var url = import.meta.env.VITE_PROXY_API_URL + '/movie/' + id + '?language=en-US'
     } else if (type == "tv") {
-        var url = "https://api.themoviedb.org/3/tv/" + id + "?language=en-US"
+        var url = import.meta.env.VITE_PROXY_API_URL + "/tv/" + id + "?language=en-US"
     }
 
     let [movieData, setMovieData] = useState({
@@ -56,7 +56,7 @@ function Card({ id, type }) {
             .catch(err => {
                 console.error(err)
 
-            });
+            })
     }, [])
 
     return (

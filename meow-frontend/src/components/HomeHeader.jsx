@@ -13,7 +13,7 @@ function HomeHeader({ setHomeIds, setMediaTypes, setContainerTitle }) {
     const handleSubmit = (event) => {
         const options = {
             method: 'GET',
-            url: 'https://api.themoviedb.org/3/search/multi',
+            url: import.meta.env.VITE_PROXY_API_URL + '/search/multi',
             params: { query: searchTitle, include_adult: 'false', language: 'en-US', page: '1' },
             headers: {
                 accept: 'application/json',

@@ -8,11 +8,13 @@ function Details() {
 
     const { cat, id } = useParams();
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [status, setStatus] = useState(-1);
+    const allStatuses = ["No Status", "To Watch", "Watching", "Completed"]
     const type = cat
     if (type == "movie") {
-        var url = 'https://api.themoviedb.org/3/movie/' + id + '?language=en-US'
+        var url = import.meta.env.VITE_PROXY_API_URL + '/movie/' + id + '?language=en-US'
     } else if (type == "tv") {
-        var url = "https://api.themoviedb.org/3/tv/" + id + "?language=en-US"
+        var url = import.meta.env.VITE_PROXY_API_URL + "/tv/" + id + "?language=en-US"
     }
 
     let [movieData, setMovieData] = useState({
@@ -73,6 +75,11 @@ function Details() {
                 console.error(err)
 
             });
+
+        axios.request(import.meta.env.VITE_BACKEND_URL + "get/0")
+            .then((res) => {
+                setStatus(res.data.status);
+            })
     }, [])
 
 
@@ -94,7 +101,7 @@ function Details() {
                 </div>
 
                 <div className="watch-btn">
-                    <button onClick={() => { setIsModalVisible(true) }}>Watched</button>
+                    <button onClick={() => { setIsModalVisible(true) }}>{allStatuses[status + 1]}</button>
                     <a href="/"><button>Go Back</button></a>
                 </div>
             </div>

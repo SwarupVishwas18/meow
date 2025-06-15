@@ -6,10 +6,10 @@ function FormModal({ setIsModalVisible }) {
                 <div className="input-div">
                     <label htmlFor="movie-status">Movie Status : </label>
                     <select name="movie-status" id="movie-status">
-                        <option value="0">No Status</option>
-                        <option value="1">To Watch</option>
-                        <option value="2">Watching</option>
-                        <option value="3">Watched</option>
+                        <option value="">No Status</option>
+                        <option value="0">To Watch</option>
+                        <option value="1">Watching</option>
+                        <option value="2">Watched</option>
                     </select>
                 </div>
                 <div className="input-div">
