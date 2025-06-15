@@ -2,10 +2,12 @@ package com.meow.meow.service;
 
 import com.meow.meow.model.Movie;
 import com.meow.meow.repository.MovieRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class MovieServiceImpl implements MovieService{
 
     private final MovieRepository movieRepository;
