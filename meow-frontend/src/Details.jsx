@@ -117,7 +117,7 @@ function Details() {
                 <img className='detail-img' src={movieData.img} alt="" />
             </div>
 
-            {isModalVisible && <FormModal movieId={id} isMovieStored={isMovieStored} movie={movie} setIsModalVisible={setIsModalVisible} />}
+            {isModalVisible && <FormModal movieId={id} isMovieStored={isMovieStored} movie={movie} setIsModalVisible={setIsModalVisible} cat={cat} />}
         </div>
     )
 }

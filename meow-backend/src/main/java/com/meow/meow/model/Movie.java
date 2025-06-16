@@ -10,6 +10,7 @@ public class Movie {
     private String watchingWith;
     private String recommendedBy;
     private int status;
+    private String cat;
 
     public void setId(Long id) {
         this.id = id;
@@ -41,5 +42,13 @@ public class Movie {
 
     public int getStatus() {
         return status;
+    }
+
+    public String getCat() {
+        return cat;
+    }
+
+    public void setCat(String cat) {
+        this.cat = cat;
     }
 }

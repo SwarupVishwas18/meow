@@ -38,6 +38,7 @@ public class MovieServiceImpl implements MovieService{
         foundMovie.setStatus(movie.getStatus());
         foundMovie.setRecommendedBy(movie.getRecommendedBy());
         foundMovie.setWatchingWith(movie.getWatchingWith());
+        foundMovie.setCat(movie.getCat());
 
         return movieRepository.save(foundMovie);
 

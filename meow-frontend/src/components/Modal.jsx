@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-function FormModal({ movieId, isMovieStored, movie, setIsModalVisible }) {
+function FormModal({ movieId, isMovieStored, movie, setIsModalVisible, cat }) {
 
     // const [updatedMovie, setUpdatedMovie] = useState(movie);
     const [status, setStatus] = useState(movie.status);
@@ -37,7 +37,8 @@ function FormModal({ movieId, isMovieStored, movie, setIsModalVisible }) {
             id: movieId,
             watchingWith: company,
             recommendedBy: recomm,
-            status: status
+            status: status,
+            cat: cat
         }
 
 
