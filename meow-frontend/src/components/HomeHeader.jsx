@@ -3,7 +3,7 @@ import logo from '../assets/logo.png'
 import Navbar from './Navbar';
 import { useEffect, useState } from 'react';
 
-function HomeHeader({ setHomeIds, setMediaTypes, setContainerTitle }) {
+function HomeHeader({ setMovies, setContainerTitle }) {
     const [searchTitle, setSearchTitle] = useState('');
 
     const handleChange = (event) => {
@@ -24,8 +24,7 @@ function HomeHeader({ setHomeIds, setMediaTypes, setContainerTitle }) {
             .request(options)
             .then(res => {
                 var results = res.data.results;
-                const homeIds = [];
-                const mediaTypes = [];
+                const moviesLocal = [];
                 results.forEach(result => {
 
                     // if (result.media_type == "movie") {
@@ -37,13 +36,15 @@ function HomeHeader({ setHomeIds, setMediaTypes, setContainerTitle }) {
                     // }
 
                     if (result.media_type == 'movie' || result.media_type == 'tv') {
-                        homeIds.push(result.id);
-                        mediaTypes.push(result.media_type);
+                        moviesLocal.push({
+                            id: result.id,
+                            cat: result.media_type,
+                            status: "-1"
+                        })
                     }
-                    setHomeIds(homeIds);
-                    setMediaTypes(mediaTypes);
                     setContainerTitle("Search Results for  " + searchTitle + " : ")
                 });
+                setMovies(moviesLocal)
             })
             .catch(err => console.error(err));
     }

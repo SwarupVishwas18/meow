@@ -1,18 +1,26 @@
 import Card from "./Card"
+import SelectComponent from "./SelectComponent";
 
-function CardContainer({ title, homeIds, mediaTypes }) {
+function CardContainer({ title, movies }) {
+
+
+
     return (
         <section className="card-section">
-            <h1>{title}</h1>
+            <div className="container-title">
+                <h1>{title}</h1>
+                {/* TODO: Add statusFilter mechanism */}
+                {title == "Your List :" && <SelectComponent />}
+            </div>
             <div className="card-container">
                 {/* <Card id={244786} type="movie" />
                   <Card id={299534} type="movie" />
                   <Card id={288331} type="tv" />
                   <Card id={202555} type="tv" />
                   <Card id={24989} type="tv" /> */}
-                {homeIds.map((id, index) => (
-                    <a href={"/details/" + mediaTypes[index] + "/" + id}>
-                        <Card key={id} id={id} type={mediaTypes[index]} />
+                {movies.map((id, index) => (
+                    <a href={"/details/" + movies[index].cat + "/" + movies[index].id}>
+                        <Card key={id} id={movies[index].id} type={movies[index].cat} />
 
                     </a>
                 ))}
