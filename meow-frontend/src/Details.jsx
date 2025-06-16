@@ -8,8 +8,11 @@ function Details() {
 
     const { cat, id } = useParams();
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [isMovieStored, setIsMovieStored] = useState(false)
     const [status, setStatus] = useState(-1);
+    const [movie, setMovie] = useState({})
     const allStatuses = ["No Status", "To Watch", "Watching", "Completed"]
+
     const type = cat
     if (type == "movie") {
         var url = import.meta.env.VITE_PROXY_API_URL + '/movie/' + id + '?language=en-US'
@@ -26,6 +29,8 @@ function Details() {
         summary: "",
 
     })
+
+
 
     const options = {
         method: 'GET',
@@ -76,9 +81,11 @@ function Details() {
 
             });
 
-        axios.request(import.meta.env.VITE_BACKEND_URL + "get/0")
+        axios.request(import.meta.env.VITE_BACKEND_URL + "get/" + id)
             .then((res) => {
                 setStatus(res.data.status);
+                setMovie(res.data)
+                setIsMovieStored(true)
             })
     }, [])
 
@@ -110,7 +117,7 @@ function Details() {
                 <img className='detail-img' src={movieData.img} alt="" />
             </div>
 
-            {isModalVisible && <FormModal setIsModalVisible={setIsModalVisible} />}
+            {isModalVisible && <FormModal movieId={id} isMovieStored={isMovieStored} movie={movie} setIsModalVisible={setIsModalVisible} />}
         </div>
     )
 }
