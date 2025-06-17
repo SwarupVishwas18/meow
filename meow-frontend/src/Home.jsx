@@ -30,6 +30,11 @@ function Home() {
             })
     }, [])
 
+    useEffect(() => {
+        console.log(movies);
+
+    }, [movies])
+
     const [containerTitle, setContainerTitle] = useState("Your List :")
 
 

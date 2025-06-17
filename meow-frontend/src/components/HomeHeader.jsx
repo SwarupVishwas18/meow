@@ -25,6 +25,7 @@ function HomeHeader({ setMovies, setContainerTitle }) {
             .then(res => {
                 var results = res.data.results;
                 const moviesLocal = [];
+                setMovies([])
                 results.forEach(result => {
 
                     // if (result.media_type == "movie") {
@@ -42,9 +43,12 @@ function HomeHeader({ setMovies, setContainerTitle }) {
                             status: "-1"
                         })
                     }
+                    setMovies(moviesLocal)
                     setContainerTitle("Search Results for  " + searchTitle + " : ")
+
+
+
                 });
-                setMovies(moviesLocal)
             })
             .catch(err => console.error(err));
     }

@@ -1,16 +1,34 @@
+import { useEffect, useState } from "react";
 import Card from "./Card"
 import SelectComponent from "./SelectComponent";
 
 function CardContainer({ title, movies }) {
+    const [statusFilter, setStatusFilter] = useState(0)
+    const [displayMovies, setDisplayMovies] = useState([])
+    useEffect(() => {
+        if (title == "Your List :") {
+            setDisplayMovies(() => {
+                return (movies.filter(movie => parseInt(movie.status) == statusFilter))
+            })
+        } else {
+            setDisplayMovies(movies)
+        }
 
 
 
+
+    }, [statusFilter, movies, title])
+
+    useEffect(() => {
+        console.log(displayMovies);
+
+    }, [displayMovies])
     return (
         <section className="card-section">
             <div className="container-title">
                 <h1>{title}</h1>
                 {/* TODO: Add statusFilter mechanism */}
-                {title == "Your List :" && <SelectComponent />}
+                {title == "Your List :" && <SelectComponent statusFilter={statusFilter} setStatusFilter={setStatusFilter} />}
             </div>
             <div className="card-container">
                 {/* <Card id={244786} type="movie" />
@@ -18,9 +36,9 @@ function CardContainer({ title, movies }) {
                   <Card id={288331} type="tv" />
                   <Card id={202555} type="tv" />
                   <Card id={24989} type="tv" /> */}
-                {movies.map((id, index) => (
-                    <a href={"/details/" + movies[index].cat + "/" + movies[index].id}>
-                        <Card key={id} id={movies[index].id} type={movies[index].cat} />
+                {displayMovies.map((id, index) => (
+                    <a href={"/details/" + displayMovies[index].cat + "/" + displayMovies[index].id}>
+                        <Card key={id} id={displayMovies[index].id} type={displayMovies[index].cat} />
 
                     </a>
                 ))}

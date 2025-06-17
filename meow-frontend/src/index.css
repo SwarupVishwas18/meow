@@ -238,3 +238,16 @@ nav ul {
   border: none;
   border-radius: 12px;
 }
+
+select.statusSelector{
+  background-color: var(--nav-bg);
+  color: var(--cols);
+  padding: .3rem;
+  border-radius: 12px;
+}
+
+.container-title{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

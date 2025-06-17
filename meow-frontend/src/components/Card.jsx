@@ -3,11 +3,7 @@ import axios from "axios";
 import not_found from '../assets/404.png'
 function Card({ id, type }) {
 
-    if (type == "movie") {
-        var url = import.meta.env.VITE_PROXY_API_URL + '/movie/' + id + '?language=en-US'
-    } else if (type == "tv") {
-        var url = import.meta.env.VITE_PROXY_API_URL + "/tv/" + id + "?language=en-US"
-    }
+
 
     let [movieData, setMovieData] = useState({
         name: "",
@@ -15,22 +11,29 @@ function Card({ id, type }) {
         date: "",
     })
 
-    const options = {
-        method: 'GET',
-        url: url,
-        headers: {
-            accept: 'application/json',
-            Authorization: 'Bearer ' + import.meta.env.VITE_API_KEY
-        }
-    };
+
 
     console.log("these are options for URL: ");
 
-    console.log(options);
 
 
 
     useEffect(() => {
+        if (type == "movie") {
+            var url = import.meta.env.VITE_PROXY_API_URL + '/movie/' + id + '?language=en-US'
+        } else if (type == "tv") {
+            var url = import.meta.env.VITE_PROXY_API_URL + "/tv/" + id + "?language=en-US"
+        }
+
+        const options = {
+            method: 'GET',
+            url: url,
+            headers: {
+                accept: 'application/json',
+                Authorization: 'Bearer ' + import.meta.env.VITE_API_KEY
+            }
+        };
+        console.log(options);
         axios
             .request(options)
             .then(res => {
@@ -57,7 +60,7 @@ function Card({ id, type }) {
                 console.error(err)
 
             })
-    }, [])
+    }, [type, id])
 
     return (
 
