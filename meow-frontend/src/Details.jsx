@@ -91,7 +91,10 @@ function Details() {
 
 
     return (
-        <div className="detail-page" >
+        <div className="detail-page" style={{
+            // backgroundImage: `radial-gradient(circle,rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(230, 220, 85, 1) 98%, rgba(237, 221, 83, 1) 100%);`
+            backgroundImage: `linear-gradient(to right, #161b21 25%,rgba(22, 27, 33, 0.9) 50%, rgba(22, 27, 33, 0.82) 70% , rgba(22, 27, 33, 0.42) 100%), url(${movieData.img})`
+        }}>
             <div className="ls">
 
                 <h1 className="movie-name">{movieData.name}</h1>

@@ -165,6 +165,8 @@ nav ul {
   padding: 2rem;
   position: relative;
   min-width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
   min-height: 100vh;
 }
 
@@ -172,7 +174,7 @@ nav ul {
   height: 60vh;
   width: auto;
   border-radius: 12px;
-  box-shadow: -30px 10px 200px 200px var(--nav-bg);
+  /* box-shadow: -30px 10px 200px 200px var(--nav-bg); */
 }
 
 .detail-page .ls {
@@ -199,6 +201,7 @@ nav ul {
 .watch-btn  button {
   position: inherit;
   margin-right: 12px;
+  background-color: var(--bg-col);
 }
 
 .form-modal {
