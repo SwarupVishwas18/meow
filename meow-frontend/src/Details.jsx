@@ -3,12 +3,14 @@ import not_found from './assets/404.png'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import FormModal from './components/Modal';
+import ActorCard from './components/ActorCard';
 
 function Details() {
 
     const { cat, id } = useParams();
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isMovieStored, setIsMovieStored] = useState(false)
+    const [castData, setCastData] = useState([])
     const [status, setStatus] = useState(-1);
     const [movie, setMovie] = useState({})
     const allStatuses = ["No Status", "To Watch", "Watching", "Completed"]
@@ -18,6 +20,12 @@ function Details() {
         var url = import.meta.env.VITE_PROXY_API_URL + '/movie/' + id + '?language=en-US'
     } else if (type == "tv") {
         var url = import.meta.env.VITE_PROXY_API_URL + "/tv/" + id + "?language=en-US"
+    }
+
+    if (type == "movie") {
+        var credit_url = import.meta.env.VITE_PROXY_API_URL + '/movie/' + id + '/credits'
+    } else if (type == "tv") {
+        var credit_url = import.meta.env.VITE_PROXY_API_URL + "/tv/" + id + "/aggregate_credits"
     }
 
     let [movieData, setMovieData] = useState({
@@ -35,6 +43,15 @@ function Details() {
     const options = {
         method: 'GET',
         url: url,
+        headers: {
+            accept: 'application/json',
+            Authorization: 'Bearer ' + import.meta.env.VITE_API_KEY
+        }
+    };
+
+    const credit_options = {
+        method: 'GET',
+        url: credit_url,
         headers: {
             accept: 'application/json',
             Authorization: 'Bearer ' + import.meta.env.VITE_API_KEY
@@ -87,40 +104,82 @@ function Details() {
                 setMovie(res.data)
                 setIsMovieStored(true)
             })
+
+        axios.request(credit_options)
+            .then((data) => {
+                console.log("hey this is credits")
+                console.log(data);
+                var casts = []
+
+                // data.data.cast.forEach(cast => {
+                for (let index = 0; index < data.data.cast.length; index++) {
+                    var cast = data.data.cast[index]
+                    var localCast = {
+                        name: cast.name,
+                        img: cast.profile_path
+                    }
+
+                    if (type == "movie") {
+                        localCast.role = cast.character
+                    } else {
+                        localCast.role = cast.roles[0].character
+                    }
+                    casts.push(localCast)
+
+                    if (casts.length == 10) {
+                        break;
+                    }
+                };
+
+                setCastData(casts);
+                console.log("Cast Data");
+
+                console.log(castData);
+
+            })
     }, [])
 
 
     return (
-        <div className="detail-page" style={{
-            // backgroundImage: `radial-gradient(circle,rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(230, 220, 85, 1) 98%, rgba(237, 221, 83, 1) 100%);`
-            backgroundImage: `linear-gradient(to right, #161b21 25%,rgba(22, 27, 33, 0.9) 50%, rgba(22, 27, 33, 0.82) 70% , rgba(22, 27, 33, 0.42) 100%), url(${movieData.img})`
-        }}>
-            <div className="ls">
+        <div className="dt-page">
 
-                <h1 className="movie-name">{movieData.name}</h1>
-                <h3 className="tagline-name">{movieData.tagline}</h3>
-                <div className="other-details">
-                    <div className="release-year"> Release Year : {movieData.date} </div>
-                    <div>|</div>
-                    <div className="imdb-rating"> Voting Avg Rating : {movieData.rating}</div>
+            <div className="detail-header" style={{
+                // backgroundImage: `radial-gradient(circle,rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(230, 220, 85, 1) 98%, rgba(237, 221, 83, 1) 100%);`
+                backgroundImage: `linear-gradient(to right, #161b21 25%,rgba(22, 27, 33, 0.9) 50%, rgba(22, 27, 33, 0.82) 70% , rgba(22, 27, 33, 0.42) 100%), url(${movieData.img})`
+            }}>
+                <div className="ls">
 
+                    <h1 className="movie-name">{movieData.name}</h1>
+                    <h3 className="tagline-name">{movieData.tagline}</h3>
+                    <div className="other-details">
+                        <div className="release-year"> Release Year : {movieData.date} </div>
+                        <div>|</div>
+                        <div className="imdb-rating"> Voting Avg Rating : {movieData.rating}</div>
+
+                    </div>
+
+                    <div className="short-summary">
+                        {movieData.summary}
+                    </div>
+
+                    <div className="watch-btn">
+                        <button onClick={() => { setIsModalVisible(true) }}>{allStatuses[status + 1]}</button>
+                        <a href="/"><button>Go Back</button></a>
+                    </div>
                 </div>
 
-                <div className="short-summary">
-                    {movieData.summary}
+                <div className="rs">
+                    <img className='detail-img' src={movieData.img} alt="" />
                 </div>
 
-                <div className="watch-btn">
-                    <button onClick={() => { setIsModalVisible(true) }}>{allStatuses[status + 1]}</button>
-                    <a href="/"><button>Go Back</button></a>
-                </div>
+                {isModalVisible && <FormModal movieId={id} isMovieStored={isMovieStored} movie={movie} setIsModalVisible={setIsModalVisible} cat={cat} />}
             </div>
 
-            <div className="rs">
-                <img className='detail-img' src={movieData.img} alt="" />
+            <div className="actor-container">
+                {castData.map((cast, index) => {
+                    return <ActorCard cast={cast} key={index} />
+                })}
             </div>
-
-            {isModalVisible && <FormModal movieId={id} isMovieStored={isMovieStored} movie={movie} setIsModalVisible={setIsModalVisible} cat={cat} />}
         </div>
     )
 }
