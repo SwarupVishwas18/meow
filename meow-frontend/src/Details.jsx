@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import FormModal from './components/Modal';
 import ActorCard from './components/ActorCard';
+import Card from './components/Card';
 
 function Details() {
 
@@ -11,6 +12,7 @@ function Details() {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isMovieStored, setIsMovieStored] = useState(false)
     const [castData, setCastData] = useState([])
+    const [similarData, setSimilarData] = useState([])
     const [status, setStatus] = useState(-1);
     const [movie, setMovie] = useState({})
     const allStatuses = ["No Status", "To Watch", "Watching", "Completed"]
@@ -18,14 +20,12 @@ function Details() {
     const type = cat
     if (type == "movie") {
         var url = import.meta.env.VITE_PROXY_API_URL + '/movie/' + id + '?language=en-US'
+        var credit_url = import.meta.env.VITE_PROXY_API_URL + '/movie/' + id + '/credits'
+        var similar_url = import.meta.env.VITE_PROXY_API_URL + '/movie/' + id + '/credits'
     } else if (type == "tv") {
         var url = import.meta.env.VITE_PROXY_API_URL + "/tv/" + id + "?language=en-US"
-    }
-
-    if (type == "movie") {
-        var credit_url = import.meta.env.VITE_PROXY_API_URL + '/movie/' + id + '/credits'
-    } else if (type == "tv") {
         var credit_url = import.meta.env.VITE_PROXY_API_URL + "/tv/" + id + "/aggregate_credits"
+        var similar_url = import.meta.env.VITE_PROXY_API_URL + "/tv/" + id + "/similar"
     }
 
     let [movieData, setMovieData] = useState({
@@ -52,6 +52,15 @@ function Details() {
     const credit_options = {
         method: 'GET',
         url: credit_url,
+        headers: {
+            accept: 'application/json',
+            Authorization: 'Bearer ' + import.meta.env.VITE_API_KEY
+        }
+    };
+
+    const similar_options = {
+        method: 'GET',
+        url: similar_url,
         headers: {
             accept: 'application/json',
             Authorization: 'Bearer ' + import.meta.env.VITE_API_KEY
@@ -137,6 +146,37 @@ function Details() {
                 console.log(castData);
 
             })
+
+        axios.request(similar_options)
+            .then((data) => {
+                console.log("hey this is Similar")
+                console.log(similar_url);
+
+                console.log(data);
+                var similarMovies = []
+
+                // data.data.cast.forEach(cast => {
+                for (let index = 0; index < data.data.results.length; index++) {
+                    var similarMovie = data.data.results[index]
+
+
+                    var localMovie = {
+                        id: similarMovie.id,
+                        type: type
+                    }
+                    similarMovies.push(localMovie)
+
+                    if (similarMovies.length == 10) {
+                        break;
+                    }
+                };
+
+                setSimilarData(similarMovies)
+                console.log("Similar Data");
+
+                console.log(similarData);
+
+            })
     }, [])
 
 
@@ -180,6 +220,18 @@ function Details() {
                     {castData.map((cast, index) => {
                         return <ActorCard cast={cast} key={index} />
                     })}
+                </div>
+            </section>
+
+            <section>
+                <h1>Similar to {movieData.name}</h1>
+                <div className="card-container">
+                    {similarData.map((id, index) => (
+                        <a href={"/details/" + similarData[index].type + "/" + similarData[index].id}>
+                            <Card key={id} id={similarData[index].id} type={similarData[index].type} />
+
+                        </a>
+                    ))}
                 </div>
             </section>
 
