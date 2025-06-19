@@ -125,7 +125,8 @@ function Details() {
                     var cast = data.data.cast[index]
                     var localCast = {
                         name: cast.name,
-                        img: cast.profile_path
+                        img: cast.profile_path,
+                        id: cast.id
                     }
 
                     if (type == "movie") {
@@ -204,7 +205,7 @@ function Details() {
 
                     <div className="watch-btn">
                         <button onClick={() => { setIsModalVisible(true) }}>{allStatuses[status + 1]}</button>
-                        <a href="/"><button>Go Back</button></a>
+                        <a href="/"><button>Go Home</button></a>
                     </div>
                 </div>
 
@@ -218,7 +219,10 @@ function Details() {
                 <h1>Cast</h1>
                 <div className="actor-container">
                     {castData.map((cast, index) => {
-                        return <ActorCard cast={cast} key={index} />
+                        return (
+                            <a href={"/actor/" + cast.id}>
+                                <ActorCard cast={cast} key={index} />
+                            </a>)
                     })}
                 </div>
             </section>

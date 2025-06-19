@@ -276,3 +276,32 @@ select.statusSelector{
   gap: 2rem;
   padding: 4rem;
 }
+
+
+.act-detail-header {
+  height: 100vh;
+  width: 100vw;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  z-index: -1;
+}
+
+.act-detail-content{
+  padding: 4rem;
+}
+
+.btns button {
+  margin: 0rem 1rem;
+  position: unset;
+  cursor: pointer;
+
+}
+
+.act-ls{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
