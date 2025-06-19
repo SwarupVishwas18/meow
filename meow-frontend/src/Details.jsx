@@ -174,12 +174,15 @@ function Details() {
 
                 {isModalVisible && <FormModal movieId={id} isMovieStored={isMovieStored} movie={movie} setIsModalVisible={setIsModalVisible} cat={cat} />}
             </div>
+            <section>
+                <h1>Cast</h1>
+                <div className="actor-container">
+                    {castData.map((cast, index) => {
+                        return <ActorCard cast={cast} key={index} />
+                    })}
+                </div>
+            </section>
 
-            <div className="actor-container">
-                {castData.map((cast, index) => {
-                    return <ActorCard cast={cast} key={index} />
-                })}
-            </div>
         </div>
     )
 }
