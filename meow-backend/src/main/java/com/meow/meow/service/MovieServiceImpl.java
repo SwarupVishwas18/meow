@@ -36,8 +36,8 @@ public class MovieServiceImpl implements MovieService{
     public Movie updateMovie(Long id, Movie movie) {
         Movie foundMovie = movieRepository.findById(id).orElseThrow();
         foundMovie.setStatus(movie.getStatus());
-        foundMovie.setRecommendedBy(movie.getRecommendedBy());
-        foundMovie.setWatchingWith(movie.getWatchingWith());
+        foundMovie.setCount(movie.getCount());
+        foundMovie.setFilePath(movie.getFilePath());
         foundMovie.setCat(movie.getCat());
 
         return movieRepository.save(foundMovie);
