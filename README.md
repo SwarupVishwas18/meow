@@ -3,11 +3,9 @@
 
 <h3>My Extra-Ordinary Watchlist</h3>
 
-[▶️ Watch the Demo](./attachments/demo.mkv) | [✏️ MIT License](./LICENSE)
+[▶️ Watch the Demo](./attachments/demo.mp4) | [✏️ MIT License](./LICENSE)
 
 </div>
-
-
 
 ## 🧠 Motivation
 
