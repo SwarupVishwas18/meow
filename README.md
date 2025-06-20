@@ -7,16 +7,7 @@
 
 </div>
 
-## Table of Contents
 
-- [🧠 Motivation](#motivation)
-- [⚙️ Why This Tech Stack?](#️why-this-tech-stack)
-- [🚀 Features](#features)
-- [🛠 Setup](#setup)
-  - [📋 Prerequisites](#prerequisites)
-  - [🔐 Environment Variables](#environment-variables)
-  - [⚙️ Backend Configuration](#️backend-configuration)
-  - [📦 Frontend Setup](#frontend-setup)
 
 ## 🧠 Motivation
 
