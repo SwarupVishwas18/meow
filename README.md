@@ -3,7 +3,7 @@
 
 <h3>My Extra-Ordinary Watchlist</h3>
 
-[▶️ Watch the Demo](./attachments/demo.mp4) | [✏️ MIT License](./LICENSE)
+[▶️ Watch the Demo](https://youtu.be/_qYLYTAN6es) | [✏️ MIT License](./LICENSE)
 
 </div>
 
