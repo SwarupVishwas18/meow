@@ -107,11 +107,14 @@ function Details() {
 
             });
 
-        axios.request(import.meta.env.VITE_BACKEND_URL + "get/" + id)
+        axios.request(import.meta.env.VITE_BACKEND_URL + "get/" + id + "?cat=" + cat)
             .then((res) => {
-                setStatus(res.data.status);
-                setMovie(res.data)
-                setIsMovieStored(true)
+                if (res.data.length > 0) {
+                    setStatus(res.data.status);
+                    setMovie(res.data)
+                    setIsMovieStored(true)
+                }
+
             })
 
         axios.request(credit_options)

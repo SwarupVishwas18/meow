@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class MovieController {
@@ -25,8 +24,8 @@ public class MovieController {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Movie> getMovie(@PathVariable Long id){
-        return movieService.getMovieById(id).map(ResponseEntity::ok).orElseGet(()-> ResponseEntity.notFound().build());
+    public List<Movie> getMovieByTmdbId(@PathVariable Long id, @RequestParam String cat){
+        return movieService.getMovieByTmdbAndCat(id,cat);
     }
 
     @DeleteMapping("/{id}")

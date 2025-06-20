@@ -5,7 +5,6 @@ import com.meow.meow.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class MovieServiceImpl implements MovieService{
@@ -23,7 +22,7 @@ public class MovieServiceImpl implements MovieService{
     }
 
     @Override
-    public Optional<Movie> getMovieById(Long id) {
+    public List<Movie> getMovieByTmdbAndCat(Long id, String cat) {
         return movieRepository.findById(id);
     }
 
@@ -37,7 +36,7 @@ public class MovieServiceImpl implements MovieService{
         Movie foundMovie = movieRepository.findById(id).orElseThrow();
         foundMovie.setStatus(movie.getStatus());
         foundMovie.setCount(movie.getCount());
-        foundMovie.setFilePath(movie.getFilePath());
+        foundMovie.setUrl(movie.getUrl());
         foundMovie.setCat(movie.getCat());
 
         return movieRepository.save(foundMovie);

@@ -34,7 +34,7 @@ function FormModal({ movieId, isMovieStored, movie, setIsModalVisible, cat }) {
         }
 
         const payload = {
-            id: movieId,
+            tmdbId: movieId,
             watchingWith: company,
             recommendedBy: recomm,
             status: status,

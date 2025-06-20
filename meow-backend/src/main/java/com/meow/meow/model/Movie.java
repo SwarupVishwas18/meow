@@ -1,24 +1,39 @@
 package com.meow.meow.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class Movie {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private int status;
     private String cat;
 
-    private String filePath;
+    private String url;
 
-    public String getFilePath() {
-        return filePath;
+    private int tmdbId;
+
+
+    public int getTmdbId() {
+        return tmdbId;
     }
 
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
+    public void setTmdbId(int tmdbId) {
+        this.tmdbId = tmdbId;
+    }
+
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getCount() {
