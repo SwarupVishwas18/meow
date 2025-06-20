@@ -305,3 +305,32 @@ select.statusSelector{
   align-items: center;
   justify-content: space-between;
 }
+
+.video-bg{
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-container {
+   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: #202730;
+  border-radius: 12px;
+}
+
+.watch-btn button.light-btn{
+  background-color: #202730;
+
+}
+
+.watch-btn button.red-btn {
+  background-color: red;
+}

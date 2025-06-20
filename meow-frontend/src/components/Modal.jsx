@@ -80,6 +80,14 @@ function FormModal({ movieId, isMovieStored, movie, setIsModalVisible, cat }) {
         }
     }
 
+    const handleDelete = () => {
+        axios.delete(import.meta.env.VITE_BACKEND_URL + movie.id)
+            .then(() => {
+                setIsModalVisible(false)
+            })
+
+    }
+
     return (
         <div className="form-modal">
             <div className="error">{error}</div>
@@ -107,8 +115,9 @@ function FormModal({ movieId, isMovieStored, movie, setIsModalVisible, cat }) {
                     <input type="text" value={url || ''} name="company" onChange={handleChangeUrl} id="company" />
                 </div>
                 <div className="watch-btn">
-                    <button onClick={handleSubmit}>Submit</button>
-                    <button onClick={() => { setIsModalVisible(false) }}>Cancel</button>
+                    <button className="light-btn" onClick={handleSubmit}>Submit</button>
+                    <button className="light-btn" onClick={() => { setIsModalVisible(false) }}>Cancel</button>
+                    {isMovieStored && <button className="red-btn" onClick={handleDelete}>Delete</button>}
                 </div>
             </div>
 

@@ -1,4 +1,4 @@
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import not_found from './assets/404.png'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -16,6 +16,7 @@ function Details() {
     const [status, setStatus] = useState(-1);
     const [movie, setMovie] = useState({})
     const allStatuses = ["No Status", "To Watch", "Watching", "Completed"]
+    const navigate = useNavigate()
 
     const type = cat
     if (type == "movie") {
@@ -189,6 +190,15 @@ function Details() {
             })
     }, [])
 
+    const handleWatch = () => {
+        if (isValidURL(movie.url)) {
+            window.open(movie.url, "_blank", "noopener,noreferrer")
+        } else if (movie.url != "") {
+            navigate(`/video/${movie.id}`)
+        }
+
+    }
+
 
     return (
         <div className="dt-page">
@@ -215,6 +225,7 @@ function Details() {
                     <div className="watch-btn">
                         <button onClick={() => { setIsModalVisible(true) }}>{allStatuses[status + 1]}</button>
                         <a href="/"><button>Go Home</button></a>
+                        {movie.url && <button onClick={handleWatch}>Watch</button>}
                     </div>
                 </div>
 
@@ -239,6 +250,7 @@ function Details() {
             <section>
                 <h1>Similar to {movieData.name}</h1>
                 <div className="card-container">
+                    {similarData.length == 0 && <h2>No Movies Found.</h2>}
                     {similarData.map((id, index) => (
                         <a href={"/details/" + similarData[index].type + "/" + similarData[index].id}>
                             <Card key={id} id={similarData[index].id} type={similarData[index].type} />
@@ -251,5 +263,14 @@ function Details() {
         </div>
     )
 }
+
+const isValidURL = (str) => {
+    try {
+        const url = new URL(str);
+        return url.protocol === 'http:' || url.protocol === 'https:';
+    } catch (_) {
+        return false;
+    }
+};
 
 export default Details;

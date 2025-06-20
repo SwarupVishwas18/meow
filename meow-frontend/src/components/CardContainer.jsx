@@ -39,6 +39,7 @@ function CardContainer({ title, movies }) {
                   <Card id={288331} type="tv" />
                   <Card id={202555} type="tv" />
                   <Card id={24989} type="tv" /> */}
+                {displayMovies.length == 0 && <h2>No Movies Found.</h2>}
                 {displayMovies.map((id, index) => (
                     <a href={"/details/" + displayMovies[index].cat + "/" + displayMovies[index].tmdbId}>
                         <Card key={id} id={displayMovies[index].tmdbId} type={displayMovies[index].cat} />
