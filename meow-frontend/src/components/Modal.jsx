@@ -5,46 +5,52 @@ function FormModal({ movieId, isMovieStored, movie, setIsModalVisible, cat }) {
 
     // const [updatedMovie, setUpdatedMovie] = useState(movie);
     const [status, setStatus] = useState(movie.status);
-    const [recomm, setRecomm] = useState(movie.recommendedBy);
-    const [company, setCompany] = useState(movie.watchingWith);
+    const [url, setUrl] = useState(movie.url);
+    const [count, setCount] = useState(movie.count || 0);
     const [error, setError] = useState("")
 
     const handleChangeSelect = (event) => {
         setStatus(event.target.value)
     }
 
-    const handleChangeRecomm = (event) => {
-        setRecomm(event.target.value)
+    const handleChangeUrl = (event) => {
+        setUrl(event.target.value)
     }
 
-    const handleChangeCompany = (event) => {
-        setCompany(event.target.value)
+    const handleChangeCount = (event) => {
+        setCount(event.target.value)
     }
 
     const handleSubmit = () => {
-        if (status == -1) {
+        if (parseInt(status) == -1) {
             setError("Hey you missed updating status")
             return;
         }
-        if (recomm == "") {
-            setRecomm("Self")
-        }
-        if (company == "") {
-            setCompany("Self")
+        if (count == "") {
+            if (parseInt(status) == 0) {
+                setCount(0)
+            } else {
+                setCount(1)
+            }
+        } else if (parseInt(count) == parseInt(movie.count)) {
+            setCount(count + 1)
         }
 
-        const payload = {
-            tmdbId: movieId,
-            watchingWith: company,
-            recommendedBy: recomm,
-            status: status,
-            cat: cat
-        }
 
 
         if (isMovieStored) {
 
-            axios.post(import.meta.env.VITE_BACKEND_URL + "update/" + movieId, payload, {
+            const payload = {
+                id: movie.id,
+                tmdbId: movieId,
+                count: count,
+                url: url,
+                status: status,
+                cat: cat
+            }
+
+
+            axios.post(import.meta.env.VITE_BACKEND_URL + "update/" + movie.id, payload, {
                 headers: {
                     "Content-Type": "application/json",
                 }
@@ -56,6 +62,15 @@ function FormModal({ movieId, isMovieStored, movie, setIsModalVisible, cat }) {
                 }
             )
         } else {
+
+            const payload = {
+                tmdbId: movieId,
+                count: count,
+                url: url,
+                status: status,
+                cat: cat
+            }
+
             axios.post(import.meta.env.VITE_BACKEND_URL + "save", payload).then(
                 (res) => {
                     setIsModalVisible(false)
@@ -81,15 +96,15 @@ function FormModal({ movieId, isMovieStored, movie, setIsModalVisible, cat }) {
                 </div>
                 <div className="input-div">
                     <label htmlFor="recommender">
-                        Recommended By
+                        Watch Count :
                     </label>
-                    <input type="text" value={recomm} onChange={handleChangeRecomm} name="recommender" id="recommender" />
+                    <input type="number" value={count} onChange={handleChangeCount} name="recommender" id="recommender" />
                 </div>
                 <div className="input-div">
                     <label htmlFor="company">
-                        Watching With?
+                        URL/Filepath
                     </label>
-                    <input type="text" value={company} name="company" onChange={handleChangeCompany} id="company" />
+                    <input type="text" value={url || ''} name="company" onChange={handleChangeUrl} id="company" />
                 </div>
                 <div className="watch-btn">
                     <button onClick={handleSubmit}>Submit</button>

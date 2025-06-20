@@ -19,11 +19,15 @@ function Home() {
                     const mLocal = {
                         id: m.id,
                         cat: m.cat,
-                        status: m.status
+                        status: m.status,
+                        tmdbId: m.tmdbId
                     }
+
 
                     moviesLocal.push(mLocal)
                 });
+
+
 
                 setMovies(moviesLocal);
 

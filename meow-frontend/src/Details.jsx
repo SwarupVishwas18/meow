@@ -110,10 +110,16 @@ function Details() {
         axios.request(import.meta.env.VITE_BACKEND_URL + "get/" + id + "?cat=" + cat)
             .then((res) => {
                 if (res.data.length > 0) {
-                    setStatus(res.data.status);
-                    setMovie(res.data)
+                    console.log("data : ");
+
+                    console.log(res.data[0].status);
+                    setStatus(res.data[0].status);
+                    setMovie(res.data[0])
                     setIsMovieStored(true)
                 }
+
+
+
 
             })
 

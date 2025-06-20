@@ -46,6 +46,7 @@ public class MovieController {
 
     @PostMapping("/update/{id}")
     public Movie updateMovie(@PathVariable Long id, @RequestBody Movie movie){
+        System.out.println(id);
         return movieService.updateMovie(id, movie);
     }
 }

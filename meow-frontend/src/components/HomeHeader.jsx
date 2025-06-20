@@ -38,7 +38,7 @@ function HomeHeader({ setMovies, setContainerTitle }) {
 
                     if (result.media_type == 'movie' || result.media_type == 'tv') {
                         moviesLocal.push({
-                            id: result.id,
+                            tmdbId: result.id,
                             cat: result.media_type,
                             status: "-1"
                         })

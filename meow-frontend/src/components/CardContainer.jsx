@@ -14,6 +14,9 @@ function CardContainer({ title, movies }) {
             setDisplayMovies(movies)
         }
 
+        console.log(movies);
+
+
 
 
 
@@ -37,9 +40,8 @@ function CardContainer({ title, movies }) {
                   <Card id={202555} type="tv" />
                   <Card id={24989} type="tv" /> */}
                 {displayMovies.map((id, index) => (
-                    <a href={"/details/" + displayMovies[index].cat + "/" + displayMovies[index].id}>
-                        <Card key={id} id={displayMovies[index].id} type={displayMovies[index].cat} />
-
+                    <a href={"/details/" + displayMovies[index].cat + "/" + displayMovies[index].tmdbId}>
+                        <Card key={id} id={displayMovies[index].tmdbId} type={displayMovies[index].cat} />
                     </a>
                 ))}
             </div>

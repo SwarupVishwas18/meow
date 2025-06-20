@@ -23,7 +23,7 @@ public class MovieServiceImpl implements MovieService{
 
     @Override
     public List<Movie> getMovieByTmdbAndCat(Long id, String cat) {
-        return movieRepository.findById(id);
+        return movieRepository.findByTmdbAndCat(id, cat);
     }
 
     @Override
